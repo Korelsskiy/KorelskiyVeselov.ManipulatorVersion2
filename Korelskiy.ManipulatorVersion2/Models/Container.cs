@@ -24,7 +24,27 @@ namespace Korelskiy.ManipulatorVersion2
 
         private void LoadCells()
         {
-            string[] cols = Size.Split("x");
+            string[] convertedSize = Size.Split("x");
+
+            int cols = int.Parse(convertedSize[0]);
+            int rows = int.Parse(convertedSize[1]);
+
+            string[] convertedCoordinates = FirstCellCoordinates.Split(" ");
+
+            int xCoord = int.Parse(convertedCoordinates[0]);
+            int yCoord = int.Parse(convertedCoordinates[1]);
+            //int zCoord = int.Parse(convertedCoordinates[2]);
+
+            Cells = new Cell[cols, rows];
+            for (int i = 0; i < cols; i++)
+            {
+                for (int j = 0; j < rows; j++)
+                {
+                    Cells[i, j] = new Cell(xCoord, yCoord);      
+                    xCoord += j != 5 ? (int)LowStep : (int)BigStep;
+                }
+                yCoord += i != 5 ? (int)LowStep : (int)BigStep;
+            }
         }
 
         public void Draw(Grid gridToDraw)
