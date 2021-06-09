@@ -1,0 +1,124 @@
+﻿<Page x:Class="Korelskiy.ManipulatorVersion2.VladTest"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Korelskiy.ManipulatorVersion2"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Page1"
+      Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
+
+    <Grid Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" 
+          Margin="50">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="1" 
+                      Grid.Column="0"
+                      Height="350"
+                      Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+            <TextBlock HorizontalAlignment="Left" 
+                       TextWrapping="Wrap"
+                       x:Name="ConsolePanel"
+                       VerticalAlignment="Top" 
+                       Width="350"
+                       Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+        </ScrollViewer>
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+
+            </Grid.RowDefinitions>
+            <CheckBox x:Name="AutoConnection"
+                  Content="Автоподключение"
+                  Grid.Row="1"
+                  Grid.Column="1"
+                  IsChecked="True"
+                  VerticalAlignment="Top"
+                  Margin="0,10,10,0"/>
+            <StackPanel Grid.Column="0"
+                    Grid.Row="0"
+                    Orientation="Horizontal">
+                <Label Content="Порты:"
+                   Margin="0,0,10,0"/>
+                <ComboBox x:Name="PortsNameBox"
+                      Width="100"
+                      Margin="0,0,10,0"/>
+
+            </StackPanel>
+            <Button x:Name="Connetion"
+                Grid.Column="4"
+                Grid.Row="0"
+                Width="150"
+                Content="Подключиться" 
+                Background="Red" Click="Connetion_Click"/>
+            <Button x:Name="Find"
+                Grid.Column="0"
+                Grid.Row="1"
+                Width="150"
+                Height="25"
+                VerticalAlignment="Top"
+                Margin="0,10,0,0"
+                Content="Найти порты" 
+                Click="Find_Click"/>
+            <Grid Grid.Column="0"
+                  Grid.Row="2"
+                  Grid.ColumnSpan="2"
+                  Margin="10,20,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0"
+                            Grid.Column="0"
+                            Orientation="Horizontal"
+                            Margin="5">
+                    <Label Content="X:"/>
+                    <TextBox x:Name="xNumber"
+                             Width="70"/>
+                </StackPanel>
+                <StackPanel Grid.Row="0"
+                            Grid.Column="1"
+                            Orientation="Horizontal"
+                            Margin="5">
+                    <Label Content="Y:"/>
+                    <TextBox x:Name="yNumber"
+                             Width="70"/>
+                </StackPanel>
+                <StackPanel Grid.Row="0"
+                            Grid.Column="2"
+                            Orientation="Horizontal"
+                            Margin="5">
+                    <Label Content="Z:"/>
+                    <TextBox x:Name="zNumber"
+                             Width="70"/>
+                </StackPanel>
+                <Button Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        Grid.Row="1"
+                        Height="25"
+                        Content="Переместиться" Click="Button_Click"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
