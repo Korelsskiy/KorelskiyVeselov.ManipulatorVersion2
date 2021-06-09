@@ -1,63 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using KorelskiyVeselov.ManipulatorVersion2.Models;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Windows.Controls;
 
 namespace Korelskiy.ManipulatorVersion2
 {
     public class Container
     {
+        [Key]
         public int Id { get; set; }
+        [Required]
         public string Title { get; set; }
+        [Required]
         public string Size { get; set; }
+        [Required]
         public string FirstCellCoordinates { get; set; }
+        [Required]
         public double LowStep { get; set; }
+        [Required]
         public double BigStep { get; set; }
+        [NotMapped]
+        public Cell[,] Cells { get; set; }
 
-        public Container() { }
-        public Container(string title, string size, string firstCellCoordinates,
-            double lowStep, double bigStep)
+        private void LoadCells()
         {
-            Title = title;
-            Size = size;
-            FirstCellCoordinates = firstCellCoordinates;
-            LowStep = lowStep;
-            BigStep = bigStep;
+            string[] cols = Size.Split("x");
         }
 
-        public int GetNumberOfRows()
+        public void Draw(Grid gridToDraw)
         {
-            string[] size = new string[2];
-            size = Size.Split("x");
-            return int.Parse(size[0]);
+           
+
+            LoadCells();
+
         }
 
-        public int GetNumberOfColumns()
-        {
-            string[] size = new string[2];
-            size = Size.Split("x");
-            return int.Parse(size[1]);
-        }
 
-        private string[] ConvertSizeToArray()
-        {
-            return Size.Split("x");
-        }
-
-        private string[] ConvertCoordinatesToArray()
-        {
-            return FirstCellCoordinates.Split(" ");
-        }
-
-        //public string[,] TransformingContainer()
-        //{
-
-        //}
-
-        public string GetCoordinates()
-        {
-            return "";
-        }
     }
 }

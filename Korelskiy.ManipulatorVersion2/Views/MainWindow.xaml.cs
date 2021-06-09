@@ -33,69 +33,7 @@ namespace Korelskiy.ManipulatorVersion2
         {
             manipulator = man;
         }
-        private void DisplayContainer(Container container)
-        {
-            containerViewGrid.Children.Clear();
-            containerViewGrid.RowDefinitions.Clear();
-            containerViewGrid.ColumnDefinitions.Clear();
-
-            int columnsCount = container.GetNumberOfColumns();
-            int rowsCount = container.GetNumberOfRows();
-            int cellsCount = columnsCount * rowsCount;
-
-            for (int i = zero; i < rowsCount; i++)
-            {
-                containerViewGrid.RowDefinitions.Add(new RowDefinition());
-            }
-
-            for (int i = zero; i < columnsCount; i++)
-            {
-                containerViewGrid.ColumnDefinitions.Add(new ColumnDefinition());
-            }
-
-            int rowCounter = zero;
-            int colCounter = zero;
-
-
-            for (int j = zero; j < rowsCount; j++)
-            {
-                for (int i = zero; i < columnsCount; i++)
-                {
-                    Image image = new Image()
-                    { 
-                        Source = new BitmapImage(new Uri(emtyTarImagePath, UriKind.Relative)),
-                        Height = cellImageSize,
-                        Width = cellImageSize 
-                    };
-                    image.MouseDown += Image_MouseDown; ;
-                    image.Tag = "Empty";
-
-                    containerViewGrid.Children.Add(image);
-                    Grid.SetRow(image, rowCounter);
-                    Grid.SetColumn(image, colCounter++);
-                }
-                colCounter = zero;
-                rowCounter++;
-            }
-            
-            
-        }
-
-        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Image image = sender as Image;
-            if (image.Tag.ToString() == "Empty")
-            {
-                image.Source = new BitmapImage(new Uri(busyTarImagePath, UriKind.Relative));
-                image.Tag = "Busy";
-            }
-            else
-            {
-                image.Source = new BitmapImage(new Uri(emtyTarImagePath, UriKind.Relative));
-                image.Tag = "Empty";
-            }
-        }
-
+       
         private void LoadComboBoxes()
         {
             AppDbContext context = new AppDbContext();
@@ -128,7 +66,13 @@ namespace Korelskiy.ManipulatorVersion2
         private void newContainerComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             containerForDisplay = newContainerComboBox.SelectedItem as Container;
-            DisplayContainer(containerForDisplay);
+
+            containerViewGrid.Children.Clear();
+            containerViewGrid.RowDefinitions.Clear();
+            containerViewGrid.ColumnDefinitions.Clear();
+
+            containerForDisplay.Draw(containerViewGrid);
+
         }
 
         private void speedTextBox_SelectionChanged(object sender, RoutedEventArgs e)

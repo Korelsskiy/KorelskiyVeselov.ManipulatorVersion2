@@ -20,12 +20,15 @@ namespace Korelskiy.ManipulatorVersion2
         {
             SerialPort.BaudRate = 115_200;
         }
+
+        // Отпаравляет команду на компорт
         private void SendCommand(string command, SerialPort serialPort)
         {
             serialPort.Write(command);
             serialPort.ReadLine();
         }
 
+        // Повернуть руку
         private void SendCommandRotate(string command, SerialPort serialPort)
         {
             serialPort.Write(command);
@@ -42,6 +45,7 @@ namespace Korelskiy.ManipulatorVersion2
 
         }
 
+        // Преобразование строки в массив координат
         public string[] Cord(string s)
         {
             double x = Convert.ToDouble(s.Split(' ')[0]);
@@ -57,6 +61,7 @@ namespace Korelskiy.ManipulatorVersion2
             return coordinate;
         }
 
+        // Перемещение
         public void Move(string s)
         {
             string[] coordinate = Cord(s);
@@ -64,17 +69,21 @@ namespace Korelskiy.ManipulatorVersion2
             SendCommand($"#n G0 X{coordinate[0]} Y{coordinate[1]} Z{coordinate[2]} F{Speed}\n", SerialPort);
         }
 
+        // Перемещение
         public void Move(string x, string y, string z)
         {
             SendCommand($"#n G0 X{x} Y{y} Z{z} F{Speed}\n", SerialPort);
         }
 
+        // Взять чип
         public void Hand(bool enable)
         {
             SendCommand($"#n M2232 V{Convert.ToInt32(enable)}\n", SerialPort);
             SendCommand($"#n M2231 V{Convert.ToInt32(enable)}\n", SerialPort);
         }
 
+
+        // Все действия
         public void Grip(string s)
         {
             string[] coordinate = Cord(s);
